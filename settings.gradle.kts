@@ -23,3 +23,4 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "NBA"
 include(":app")
 include(":core:designsystem")
+include(":core:model")
