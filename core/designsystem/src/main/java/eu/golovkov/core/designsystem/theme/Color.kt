@@ -1,4 +1,4 @@
-package eu.golovkov.nba.ui.theme
+package eu.golovkov.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
