@@ -11,10 +11,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import eu.golovkov.core.designsystem.theme.NBATheme
+import eu.golovkov.core.network.di.NetworkModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        startKoin {
+            androidContext(this@MainActivity.application)
+            modules(
+                NetworkModule()
+            )
+        }
+
         setContent {
             NBATheme {
                 // A surface container using the 'background' color from the theme

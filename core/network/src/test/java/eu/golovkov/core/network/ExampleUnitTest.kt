@@ -1,4 +1,4 @@
-package eu.golovkov.core.model
+package eu.golovkov.core.network
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "eu.golovkov.core.designsystem"
+    namespace = "eu.golovkov.core.network"
     compileSdk = 34
 
     defaultConfig {
@@ -41,12 +41,18 @@ android {
 
 dependencies {
 
-    implementation(libs.core.ktx)
-    implementation(platform(libs.compose.bom))
-    implementation(libs.ui)
-    implementation(libs.ui.graphics)
-    implementation(libs.ui.tooling.preview)
-    implementation(libs.material3)
-    implementation(libs.androidx.test.ext.junit)
-    implementation(libs.junit)
+    implementation(projects.core.model)
+    implementation(libs.koin)
+    implementation(libs.moshi)
+    implementation(libs.retrofit.moshi)
+    implementation(libs.retrofit.coroutines.adapter)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp.logging)
+    implementation(libs.retrofit.core)
+    implementation(libs.retrofit.kotlin.serialization)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.espresso.core)
 }

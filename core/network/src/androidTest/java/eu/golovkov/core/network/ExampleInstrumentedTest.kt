@@ -1,4 +1,4 @@
-package eu.golovkov.core.model
+package eu.golovkov.core.network
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
@@ -17,6 +17,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("eu.golovkov.core.model.test", appContext.packageName)
+        assertEquals("eu.golovkov.core.network.test", appContext.packageName)
     }
 }
