@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -44,7 +45,15 @@ android {
     }
 }
 
+ksp {
+    arg("compose-destinations.mode", "navgraphs")
+    arg("compose-destinations.moduleName", "teamdetails")
+    arg("compose-destinations.useComposableVisibility", "true")
+}
+
 dependencies {
 
     implementation(libs.activity.compose)
+    implementation(libs.compose.destination.core)
+    ksp(libs.compose.destination.ksp)
 }

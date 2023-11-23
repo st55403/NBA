@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -53,6 +54,10 @@ android {
 dependencies {
     implementation(projects.core.designsystem)
     implementation(projects.core.network)
+    implementation(projects.core.navigation)
+
+    implementation(libs.compose.destination.core)
+    ksp(libs.compose.destination.ksp)
 
     implementation(libs.koin)
     implementation(libs.lifecycle.runtime.ktx)

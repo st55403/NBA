@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "eu.golovkov.feature.playerdetails"
+    namespace = "eu.golovkov.core.navigation"
     compileSdk = 34
 
     defaultConfig {
@@ -38,22 +38,13 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-}
-
-ksp {
-    arg("compose-destinations.mode", "navgraphs")
-    arg("compose-destinations.moduleName", "playerdetails")
-    arg("compose-destinations.useComposableVisibility", "true")
 }
 
 dependencies {
+    implementation(projects.feature.playerdetails)
+    implementation(projects.feature.playerlist)
+    implementation(projects.feature.teamdetails)
 
-    implementation(libs.activity.compose)
     implementation(libs.compose.destination.core)
     ksp(libs.compose.destination.ksp)
 }
