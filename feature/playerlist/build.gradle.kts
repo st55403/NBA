@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "eu.golovkov.core.model"
+    namespace = "eu.golovkov.feature.playerlist"
     compileSdk = 34
 
     defaultConfig {
@@ -31,9 +31,22 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
 
     implementation(libs.core.ktx)
+    implementation(libs.appcompat)
+    implementation(libs.material)
 }

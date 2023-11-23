@@ -18,6 +18,8 @@ koin = "3.1.5"
 moshi = "1.13.0"
 coroutinesAdapter = "0.9.2"
 org-jetbrains-kotlin-jvm = "1.9.0"
+appcompat = "1.6.1"
+material = "1.10.0"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -44,6 +46,8 @@ retrofit-coroutines-adapter = { group = "com.jakewharton.retrofit", name = "retr
 retrofit-kotlin-serialization = { group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxSerializationJson" }
 koin = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
 moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 
 [plugins]
