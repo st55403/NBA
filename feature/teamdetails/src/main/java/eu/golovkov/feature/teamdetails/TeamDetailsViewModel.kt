@@ -2,7 +2,6 @@ package eu.golovkov.feature.teamdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import eu.golovkov.core.model.data.Team
 import eu.golovkov.core.network.RetrofitNBANetworkApi
 import eu.golovkov.core.network.model.asTeam
 import kotlinx.coroutines.Dispatchers
@@ -28,10 +27,4 @@ class TeamDetailsViewModel(
             }
         }
     }
-}
-
-sealed interface TeamUiState {
-    data object Loading : TeamUiState
-    data object Error : TeamUiState
-    data class Success(val team: Team) : TeamUiState
 }
