@@ -7,6 +7,7 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import eu.golovkov.core.designsystem.theme.NBATheme
 import eu.golovkov.core.navigation.RootNavGraph
 import eu.golovkov.core.network.di.NetworkModule
+import eu.golovkov.feature.playerdetails.di.PlayerDetailsModule
 import eu.golovkov.feature.playerlist.di.PlayerListModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -20,6 +21,7 @@ class MainActivity : ComponentActivity() {
             modules(
                 NetworkModule(),
                 PlayerListModule(),
+                PlayerDetailsModule(),
             )
         }
 

@@ -57,6 +57,8 @@ dependencies {
     implementation(projects.core.navigation)
 
     implementation(projects.feature.playerlist)
+    implementation(projects.feature.playerdetails)
+    implementation(projects.feature.teamdetails)
 
     implementation(libs.compose.destination.core)
     ksp(libs.compose.destination.ksp)
