@@ -148,7 +148,7 @@ fun PlayerItem(
             )
             Text(
                 modifier = modifier.padding(horizontal = 32.dp),
-                text = user?.team?.name ?: ""
+                text = user?.team?.fullName ?: ""
             )
         }
     }
