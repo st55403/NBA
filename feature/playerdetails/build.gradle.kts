@@ -57,6 +57,8 @@ dependencies {
     implementation(projects.core.model)
     implementation(projects.core.designsystem)
 
+    implementation(projects.feature.teamdetails)
+
     implementation(libs.activity.compose)
     implementation(libs.compose.destination.core)
     ksp(libs.compose.destination.ksp)

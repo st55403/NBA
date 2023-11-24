@@ -9,6 +9,7 @@ import eu.golovkov.core.navigation.RootNavGraph
 import eu.golovkov.core.network.di.NetworkModule
 import eu.golovkov.feature.playerdetails.di.PlayerDetailsModule
 import eu.golovkov.feature.playerlist.di.PlayerListModule
+import eu.golovkov.feature.teamdetails.di.TeamDetailsModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -22,6 +23,7 @@ class MainActivity : ComponentActivity() {
                 NetworkModule(),
                 PlayerListModule(),
                 PlayerDetailsModule(),
+                TeamDetailsModule(),
             )
         }
 

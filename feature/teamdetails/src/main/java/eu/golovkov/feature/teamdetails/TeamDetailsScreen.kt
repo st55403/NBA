@@ -1,13 +1,68 @@
 package eu.golovkov.feature.teamdetails
 
-import android.util.Log
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import eu.golovkov.core.designsystem.component.NBALoadingWheel
+import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
 @Destination
 @Composable
-internal fun TeamDetailsScreen() {
-    Log.v("TeamDetailsScreen", "TeamDetailsScreen")
+fun TeamDetailsScreen(
+    teamId: Int? = null,
+) {
+    val viewModel = getViewModel<TeamDetailsViewModel>()
+    val state by viewModel.state.collectAsState()
+
+    LaunchedEffect(teamId) {
+        teamId?.let { viewModel.getTeamDetails(it) }
+    }
+
+    TeamDetails(
+        state = state,
+    )
+}
+
+@Composable
+fun TeamDetails(
+    state: TeamUiState
+) {
+    when (state) {
+        TeamUiState.Error -> {
+
+        }
+
+        TeamUiState.Loading -> NBALoadingWheel(
+            contentDesc = "Loading",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(all = 32.dp)
+        )
+
+        is TeamUiState.Success -> {
+            val team = state.team
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                Text(text = team.abbreviation)
+                Text(text = team.city)
+                Text(text = team.conference)
+                Text(text = team.division)
+                Text(text = team.fullName)
+                Text(text = team.name)
+            }
+        }
+    }
 }
