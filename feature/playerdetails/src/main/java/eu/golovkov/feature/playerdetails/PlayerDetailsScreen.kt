@@ -44,6 +44,7 @@ fun PlayerDetailsScreen(
 
 @Composable
 fun PlayerDetails(
+    modifier: Modifier = Modifier,
     state: PlayerDetailsUiState,
     onTeamClick: (Team) -> Unit,
 ) {
@@ -54,7 +55,7 @@ fun PlayerDetails(
 
         PlayerDetailsUiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(all = 32.dp)
         )
@@ -62,7 +63,7 @@ fun PlayerDetails(
         is PlayerDetailsUiState.Success -> {
             val player = state.player
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxSize()
             ) {
                 Text(text = player.firstName)
@@ -75,7 +76,7 @@ fun PlayerDetails(
                 Text(text = player.firstName)
                 Text(
                     text = player.team.fullName,
-                    modifier = Modifier.clickable { onTeamClick(player.team) }
+                    modifier = modifier.clickable { onTeamClick(player.team) }
                 )
             }
         }

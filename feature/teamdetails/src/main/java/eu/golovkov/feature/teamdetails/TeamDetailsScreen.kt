@@ -36,7 +36,8 @@ fun TeamDetailsScreen(
 
 @Composable
 fun TeamDetails(
-    state: TeamUiState
+    modifier: Modifier = Modifier,
+    state: TeamUiState,
 ) {
     when (state) {
         TeamUiState.Error -> {
@@ -45,7 +46,7 @@ fun TeamDetails(
 
         TeamUiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .padding(all = 32.dp)
         )
@@ -53,7 +54,7 @@ fun TeamDetails(
         is TeamUiState.Success -> {
             val team = state.team
             Column(
-                modifier = Modifier
+                modifier = modifier
                     .fillMaxSize()
             ) {
                 Text(text = team.abbreviation)
