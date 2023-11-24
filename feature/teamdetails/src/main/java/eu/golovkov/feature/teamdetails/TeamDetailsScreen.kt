@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
-import eu.golovkov.core.designsystem.component.NBALoadingWheel
+import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
@@ -43,7 +43,7 @@ fun TeamDetails(
 
         }
 
-        TeamUiState.Loading -> NBALoadingWheel(
+        TeamUiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
             modifier = Modifier
                 .fillMaxWidth()

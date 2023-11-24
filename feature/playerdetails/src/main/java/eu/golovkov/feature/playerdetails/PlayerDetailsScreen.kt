@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import eu.golovkov.core.designsystem.component.NBALoadingWheel
+import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.model.data.Team
 import eu.golovkov.feature.teamdetails.destinations.TeamDetailsScreenDestination
 import org.koin.androidx.compose.getViewModel
@@ -52,7 +52,7 @@ fun PlayerDetails(
 
         }
 
-        PlayerDetailsUiState.Loading -> NBALoadingWheel(
+        PlayerDetailsUiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
             modifier = Modifier
                 .fillMaxWidth()
