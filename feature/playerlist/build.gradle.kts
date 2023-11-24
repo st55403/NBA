@@ -56,6 +56,8 @@ dependencies {
     implementation(projects.core.model)
     implementation(projects.core.designsystem)
 
+    implementation(projects.feature.playerdetails)
+
     implementation(libs.koin)
     implementation(libs.paging.compose)
     implementation(libs.activity.compose)

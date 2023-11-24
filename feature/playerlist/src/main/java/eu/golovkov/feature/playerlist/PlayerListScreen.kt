@@ -31,27 +31,35 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBALoadingWheel
 import eu.golovkov.core.model.data.Player
+import eu.golovkov.feature.playerdetails.destinations.PlayerDetailsScreenDestination
 import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
 @Destination
 @Composable
-internal fun PlayerListScreen() {
+fun PlayerListScreen(
+    navigator: DestinationsNavigator,
+) {
     val viewModel = getViewModel<PlayerListViewModel>()
 
     val pagingPlayers = viewModel.allPlayers.collectAsLazyPagingItems()
 
     UsersScreen(
-        players = pagingPlayers
+        players = pagingPlayers,
+        onPlayerClick = { player ->
+            navigator.navigate(PlayerDetailsScreenDestination(playerId = player.id))
+        }
     )
 }
 
 @Composable
 fun UsersScreen(
     modifier: Modifier = Modifier,
-    players: LazyPagingItems<Player>
+    players: LazyPagingItems<Player>,
+    onPlayerClick: (Player) -> Unit
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -93,7 +101,12 @@ fun UsersScreen(
         }
         items(count = players.itemCount) { index ->
             val item = players[index]
-            PlayerItem(user = item)
+            item?.let {
+                PlayerItem(
+                    user = item,
+                    onClick = { onPlayerClick(item) }
+                )
+            }
         }
         when (players.loadState.append) {
             LoadState.Loading -> {
@@ -123,11 +136,13 @@ fun UsersScreen(
 @Composable
 fun PlayerItem(
     modifier: Modifier = Modifier,
-    user: Player?
+    user: Player,
+    onClick: () -> Unit
 ) {
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .clickable { onClick() }
             .background(
                 color = Color.Green,
                 shape = RoundedCornerShape(16.dp)
