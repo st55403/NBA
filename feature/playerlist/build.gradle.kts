@@ -54,6 +54,7 @@ ksp {
 dependencies {
     implementation(projects.core.network)
     implementation(projects.core.model)
+    implementation(projects.core.designsystem)
 
     implementation(libs.koin)
     implementation(libs.paging.compose)
