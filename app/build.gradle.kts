@@ -56,6 +56,8 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.navigation)
 
+    implementation(projects.feature.playerlist)
+
     implementation(libs.compose.destination.core)
     ksp(libs.compose.destination.ksp)
 

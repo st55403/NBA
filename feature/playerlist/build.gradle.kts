@@ -52,8 +52,13 @@ ksp {
 }
 
 dependencies {
+    implementation(projects.core.network)
+    implementation(projects.core.model)
 
+    implementation(libs.koin)
+    implementation(libs.paging.compose)
     implementation(libs.activity.compose)
     implementation(libs.compose.destination.core)
+    implementation(libs.androidx.material3)
     ksp(libs.compose.destination.ksp)
 }

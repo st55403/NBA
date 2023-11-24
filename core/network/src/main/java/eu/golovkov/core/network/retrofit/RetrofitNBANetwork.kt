@@ -1,19 +1,25 @@
 package eu.golovkov.core.network.retrofit
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import eu.golovkov.core.network.NBANetworkDataSource
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import eu.golovkov.core.network.RetrofitNBANetworkApi
 import eu.golovkov.core.network.model.NetworkPlayer
+import eu.golovkov.core.network.model.NetworkPlayersResponse
 import eu.golovkov.core.network.model.NetworkTeam
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
-private const val BASE_URL = "https://www.balldontlie.io/api/v1/"
-
-private interface RetrofitNBANetworkApi {
+private interface RetrofitNiaNetworkApi {
     @GET(value = "players")
-    suspend fun getNBAPlayers(): List<NetworkPlayer>
+    suspend fun getNBAPlayers(
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+    ): NetworkPlayersResponse
 
     @GET(value = "players/{id}")
     suspend fun getNBAPlayerDetails(
@@ -26,17 +32,27 @@ private interface RetrofitNBANetworkApi {
     ): NetworkTeam
 }
 
-class RetrofitNBANetwork : NBANetworkDataSource {
-
+class RetrofitNBANetwork(BASE_URL: String) : RetrofitNBANetworkApi {
+    private val intercepter = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+    private val client = OkHttpClient.Builder().apply {
+        addInterceptor(intercepter)
+    }.build()
+    val json = Json {
+        ignoreUnknownKeys = true
+    }
     private val networkApi = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(MoshiConverterFactory.create())
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .callFactory(client)
+        .addConverterFactory(
+            json.asConverterFactory("application/json".toMediaType())
+        )
         .build()
-        .create(RetrofitNBANetworkApi::class.java)
+        .create(RetrofitNiaNetworkApi::class.java)
 
-    override suspend fun getNBAPlayers(): List<NetworkPlayer> =
-        networkApi.getNBAPlayers()
+    override suspend fun getNBAPlayers(page: Int, perPage: Int): NetworkPlayersResponse =
+        networkApi.getNBAPlayers(page, perPage)
 
     override suspend fun getNBAPlayerDetails(id: Int): NetworkPlayer =
         networkApi.getNBAPlayerDetails(id)
