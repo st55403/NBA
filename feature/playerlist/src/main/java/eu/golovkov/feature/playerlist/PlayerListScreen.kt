@@ -1,9 +1,7 @@
 package eu.golovkov.feature.playerlist
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,16 +10,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Refresh
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +26,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBALoadingWheel
 import eu.golovkov.core.model.data.Player
+import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.feature.playerdetails.destinations.PlayerDetailsScreenDestination
 import org.koin.androidx.compose.getViewModel
 
@@ -85,9 +78,7 @@ fun UsersScreen(
 
             is LoadState.Error -> {
                 item {
-                    PaginationErrorItem {
-                        players.refresh()
-                    }
+                    ErrorState(modifier)
                 }
             }
 
@@ -122,9 +113,7 @@ fun UsersScreen(
 
             is LoadState.Error -> {
                 item {
-                    PaginationRetryItem {
-                        players.retry()
-                    }
+                    ErrorState(modifier)
                 }
             }
 
@@ -151,38 +140,20 @@ fun PlayerItem(
         Column {
             Text(
                 modifier = modifier.padding(horizontal = 32.dp),
-                text = user?.firstName ?: ""
+                text = user.firstName ?: ""
             )
             Text(
                 modifier = modifier.padding(horizontal = 32.dp),
-                text = user?.lastName ?: ""
+                text = user.lastName ?: ""
             )
             Text(
                 modifier = modifier.padding(horizontal = 32.dp),
-                text = user?.position ?: ""
+                text = user.position ?: ""
             )
             Text(
                 modifier = modifier.padding(horizontal = 32.dp),
-                text = user?.team?.fullName ?: ""
+                text = user.team.fullName ?: ""
             )
-        }
-    }
-}
-
-@Composable
-fun PaginationErrorItem(
-    modifier: Modifier = Modifier,
-    onTryAgainClick: () -> Unit
-) {
-    Box(
-        modifier = modifier.fillMaxWidth(),
-        contentAlignment = Alignment.Center
-    ) {
-        Button(
-            modifier = modifier,
-            onClick = onTryAgainClick
-        ) {
-            Text(text = "Try Again")
         }
     }
 }
@@ -198,31 +169,6 @@ fun EmptyItem(
         Text(
             modifier = Modifier.padding(all = 32.dp),
             text = "No user found"
-        )
-    }
-}
-
-@Composable
-fun PaginationRetryItem(
-    modifier: Modifier = Modifier,
-    onRetryClick: () -> Unit
-) {
-    Card(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(all = 16.dp),
-        shape = RoundedCornerShape(8.dp)
-    ) {
-        Image(
-            modifier = Modifier
-                .size(32.dp)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = null,
-                    onClick = onRetryClick
-                ),
-            imageVector = Icons.Rounded.Refresh,
-            contentDescription = null,
         )
     }
 }

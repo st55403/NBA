@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
+import eu.golovkov.core.ui.ErrorState
 import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
@@ -40,9 +41,7 @@ fun TeamDetails(
     state: TeamUiState,
 ) {
     when (state) {
-        TeamUiState.Error -> {
-
-        }
+        TeamUiState.Error -> ErrorState(modifier)
 
         TeamUiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",

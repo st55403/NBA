@@ -56,6 +56,7 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.model)
     implementation(projects.core.designsystem)
+    implementation(projects.core.ui)
 
     implementation(projects.feature.teamdetails)
 

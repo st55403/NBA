@@ -17,6 +17,7 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.model.data.Team
+import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.feature.teamdetails.destinations.TeamDetailsScreenDestination
 import org.koin.androidx.compose.getViewModel
 
@@ -49,9 +50,7 @@ fun PlayerDetails(
     onTeamClick: (Team) -> Unit,
 ) {
     when (state) {
-        PlayerDetailsUiState.Error -> {
-
-        }
+        PlayerDetailsUiState.Error -> ErrorState(modifier)
 
         PlayerDetailsUiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
