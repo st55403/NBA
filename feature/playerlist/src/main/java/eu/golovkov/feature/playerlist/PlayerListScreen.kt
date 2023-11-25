@@ -93,7 +93,7 @@ private fun UsersScreen(
             val item = players[index]
             item?.let {
                 PlayerItem(
-                    user = item,
+                    player = item,
                     onClick = { onPlayerClick(item) }
                 )
             }
@@ -124,7 +124,7 @@ private fun UsersScreen(
 @Composable
 private fun PlayerItem(
     modifier: Modifier = Modifier,
-    user: Player,
+    player: Player,
     onClick: () -> Unit
 ) {
     Card(
@@ -137,18 +137,17 @@ private fun PlayerItem(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(all = 16.dp),
-            horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = "${user.firstName} ${user.lastName}",
+                text = "${player.firstName} ${player.lastName}",
                 style = MaterialTheme.typography.headlineMedium,
             )
             Text(
-                text = stringResource(R.string.position, user.position),
+                text = stringResource(R.string.position, player.position),
                 style = MaterialTheme.typography.headlineSmall,
             )
             Text(
-                text = stringResource(R.string.team, user.team.fullName),
+                text = stringResource(R.string.team, player.team.fullName),
                 style = MaterialTheme.typography.bodyLarge,
             )
         }

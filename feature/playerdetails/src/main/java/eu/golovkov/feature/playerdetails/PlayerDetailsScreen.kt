@@ -1,6 +1,7 @@
 package eu.golovkov.feature.playerdetails
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -11,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
@@ -67,44 +69,35 @@ private fun PlayerDetails(
                     .padding(all = 16.dp),
                 shape = MaterialTheme.shapes.large,
             ) {
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.firstName
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.lastName
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.heightFeet.toString()
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.heightInches.toString()
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.position
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.weightPounds.toString()
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.firstName
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = player.firstName
-                )
-                Text(
-                    text = player.team.fullName,
+                Column(
                     modifier = modifier
-                        .padding(horizontal = 32.dp)
-                        .clickable { onTeamClick(player.team) }
-                )
+                        .fillMaxWidth()
+                        .padding(all = 16.dp),
+                ) {
+                    Text(
+                        text = "${player.firstName} ${player.lastName}",
+                        style = MaterialTheme.typography.headlineMedium,
+                    )
+                    Text(
+                        text = stringResource(R.string.position, player.position),
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+                    Text(
+                        text = stringResource(
+                            R.string.height,
+                            player.heightFeet,
+                            player.heightInches
+                        ),
+                    )
+                    Text(
+                        text = stringResource(R.string.weight, player.weightPounds),
+                    )
+                    Text(
+                        text = stringResource(R.string.team, player.team.fullName),
+                        modifier = modifier.clickable { onTeamClick(player.team) },
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
             }
         }
     }
