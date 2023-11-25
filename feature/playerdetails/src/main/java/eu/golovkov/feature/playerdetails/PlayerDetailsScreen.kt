@@ -1,10 +1,10 @@
 package eu.golovkov.feature.playerdetails
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -44,7 +44,7 @@ fun PlayerDetailsScreen(
 }
 
 @Composable
-fun PlayerDetails(
+private fun PlayerDetails(
     modifier: Modifier = Modifier,
     state: PlayerDetailsUiState,
     onTeamClick: (Team) -> Unit,
@@ -61,21 +61,49 @@ fun PlayerDetails(
 
         is PlayerDetailsUiState.Success -> {
             val player = state.player
-            Column(
+            Card(
                 modifier = modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .padding(all = 16.dp),
+                shape = MaterialTheme.shapes.large,
             ) {
-                Text(text = player.firstName)
-                Text(text = player.lastName)
-                Text(text = player.heightFeet.toString())
-                Text(text = player.heightInches.toString())
-                Text(text = player.position)
-                Text(text = player.weightPounds.toString())
-                Text(text = player.firstName)
-                Text(text = player.firstName)
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.firstName
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.lastName
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.heightFeet.toString()
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.heightInches.toString()
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.position
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.weightPounds.toString()
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.firstName
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = player.firstName
+                )
                 Text(
                     text = player.team.fullName,
-                    modifier = modifier.clickable { onTeamClick(player.team) }
+                    modifier = modifier
+                        .padding(horizontal = 32.dp)
+                        .clickable { onTeamClick(player.team) }
                 )
             }
         }
