@@ -3,6 +3,7 @@ package eu.golovkov.feature.playerlist
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -131,22 +133,25 @@ private fun PlayerItem(
             .clickable { onClick() },
         shape = MaterialTheme.shapes.large,
     ) {
-        Text(
-            modifier = modifier.padding(horizontal = 32.dp),
-            text = user.firstName
-        )
-        Text(
-            modifier = modifier.padding(horizontal = 32.dp),
-            text = user.lastName
-        )
-        Text(
-            modifier = modifier.padding(horizontal = 32.dp),
-            text = user.position
-        )
-        Text(
-            modifier = modifier.padding(horizontal = 32.dp),
-            text = user.team.fullName
-        )
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(all = 16.dp),
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(
+                text = "${user.firstName} ${user.lastName}",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+            Text(
+                text = stringResource(R.string.position, user.position),
+                style = MaterialTheme.typography.headlineSmall,
+            )
+            Text(
+                text = stringResource(R.string.team, user.team.fullName),
+                style = MaterialTheme.typography.bodyLarge,
+            )
+        }
     }
 }
 
