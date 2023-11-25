@@ -1,9 +1,9 @@
 package eu.golovkov.feature.teamdetails
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,7 +36,7 @@ fun TeamDetailsScreen(
 }
 
 @Composable
-fun TeamDetails(
+private fun TeamDetails(
     modifier: Modifier = Modifier,
     state: TeamUiState,
 ) {
@@ -52,16 +52,36 @@ fun TeamDetails(
 
         is TeamUiState.Success -> {
             val team = state.team
-            Column(
+            Card(
                 modifier = modifier
-                    .fillMaxSize()
+                    .fillMaxWidth()
+                    .padding(all = 16.dp),
+                shape = MaterialTheme.shapes.large,
             ) {
-                Text(text = team.abbreviation)
-                Text(text = team.city)
-                Text(text = team.conference)
-                Text(text = team.division)
-                Text(text = team.fullName)
-                Text(text = team.name)
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = team.abbreviation
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = team.city
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = team.conference
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = team.division
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = team.fullName
+                )
+                Text(
+                    modifier = modifier.padding(horizontal = 32.dp),
+                    text = team.name
+                )
             }
         }
     }
