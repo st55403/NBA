@@ -46,7 +46,7 @@ fun PlayerListScreen(
 }
 
 @Composable
-fun UsersScreen(
+private fun UsersScreen(
     modifier: Modifier = Modifier,
     players: LazyPagingItems<Player>,
     onPlayerClick: (Player) -> Unit
@@ -120,7 +120,7 @@ fun UsersScreen(
 }
 
 @Composable
-fun PlayerItem(
+private fun PlayerItem(
     modifier: Modifier = Modifier,
     user: Player,
     onClick: () -> Unit
@@ -133,25 +133,25 @@ fun PlayerItem(
     ) {
         Text(
             modifier = modifier.padding(horizontal = 32.dp),
-            text = user.firstName ?: ""
+            text = user.firstName
         )
         Text(
             modifier = modifier.padding(horizontal = 32.dp),
-            text = user.lastName ?: ""
+            text = user.lastName
         )
         Text(
             modifier = modifier.padding(horizontal = 32.dp),
-            text = user.position ?: ""
+            text = user.position
         )
         Text(
             modifier = modifier.padding(horizontal = 32.dp),
-            text = user.team.fullName ?: ""
+            text = user.team.fullName
         )
     }
 }
 
 @Composable
-fun EmptyItem(
+private fun EmptyItem(
     modifier: Modifier = Modifier
 ) {
     Box(
