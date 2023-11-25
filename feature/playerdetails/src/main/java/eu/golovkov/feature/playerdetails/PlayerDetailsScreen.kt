@@ -1,6 +1,5 @@
 package eu.golovkov.feature.playerdetails
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -18,6 +18,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
+import eu.golovkov.core.designsystem.component.NBATopicTag
 import eu.golovkov.core.model.data.Team
 import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.feature.teamdetails.destinations.TeamDetailsScreenDestination
@@ -92,10 +93,18 @@ private fun PlayerDetails(
                     Text(
                         text = stringResource(R.string.weight, player.weightPounds),
                     )
-                    Text(
-                        text = stringResource(R.string.team, player.team.fullName),
-                        modifier = modifier.clickable { onTeamClick(player.team) },
-                        style = MaterialTheme.typography.bodyLarge,
+                    NBATopicTag(
+                        modifier = modifier
+                            .align(Alignment.End),
+                        followed = true,
+                        onClick = { onTeamClick(player.team) },
+                        enabled = true,
+                        text = {
+                            Text(
+                                text = player.team.fullName,
+                                style = MaterialTheme.typography.bodyLarge,
+                            )
+                        }
                     )
                 }
             }

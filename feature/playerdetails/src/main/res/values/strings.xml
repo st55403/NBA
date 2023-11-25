@@ -3,5 +3,4 @@
     <string name="position">"Position: %1$s"</string>
     <string name="height">"Height: %1$.1f feet or %2$.1f inches"</string>
     <string name="weight">"Weight: %1$.1f"</string>
-    <string name="team">"Team: %1$s"</string>
 </resources>
