@@ -32,7 +32,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import eu.golovkov.core.designsystem.theme.NBAPadding
 import eu.golovkov.core.designsystem.theme.NBATheme
 import kotlinx.coroutines.launch
 
@@ -95,8 +95,8 @@ fun NBALoadingWheel(
     // Draws out the LoadingWheel Canvas composable and sets the animations
     Canvas(
         modifier = modifier
-            .size(48.dp)
-            .padding(8.dp)
+            .size(NBAPadding.large)
+            .padding(NBAPadding.small)
             .graphicsLayer { rotationZ = rotationAnim }
             .semantics { contentDescription = contentDesc }
             .testTag("loadingWheel"),
@@ -123,11 +123,11 @@ fun NBAOverlayLoadingWheel(
     modifier: Modifier = Modifier,
 ) {
     Surface(
-        shape = RoundedCornerShape(60.dp),
-        shadowElevation = 8.dp,
+        shape = RoundedCornerShape(NBAPadding.huge),
+        shadowElevation = NBAPadding.small,
         color = MaterialTheme.colorScheme.surface.copy(alpha = 0.83f),
         modifier = modifier
-            .size(60.dp),
+            .size(NBAPadding.huge),
     ) {
         NBALoadingWheel(
             contentDesc = contentDesc,

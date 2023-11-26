@@ -16,7 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -24,6 +23,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBALoadingWheel
+import eu.golovkov.core.designsystem.theme.NBAPadding
 import eu.golovkov.core.model.data.Player
 import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.feature.playerdetails.destinations.PlayerDetailsScreenDestination
@@ -55,12 +55,9 @@ private fun UsersScreen(
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
-        verticalArrangement = if (players.itemCount > 0) Arrangement.spacedBy(8.dp) else Arrangement.Center,
+        verticalArrangement = if (players.itemCount > 0) Arrangement.spacedBy(NBAPadding.small) else Arrangement.Center,
         contentPadding = PaddingValues(
-            start = 16.dp,
-            end = 16.dp,
-            bottom = 16.dp,
-            top = 16.dp
+            all = NBAPadding.medium
         ),
     ) {
         when (players.loadState.refresh) {
@@ -70,7 +67,7 @@ private fun UsersScreen(
                         contentDesc = "Loading",
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(all = 32.dp)
+                            .padding(all = NBAPadding.bigger)
                     )
                 }
             }
@@ -105,7 +102,7 @@ private fun UsersScreen(
                         contentDesc = "Loading",
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(all = 32.dp)
+                            .padding(all = NBAPadding.bigger)
                     )
                 }
             }
@@ -136,7 +133,7 @@ private fun PlayerItem(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(all = 16.dp),
+                .padding(all = NBAPadding.medium),
         ) {
             Text(
                 text = "${player.firstName} ${player.lastName}",
@@ -163,7 +160,7 @@ private fun EmptyItem(
         contentAlignment = Alignment.Center
     ) {
         Text(
-            modifier = Modifier.padding(all = 32.dp),
+            modifier = Modifier.padding(all = NBAPadding.bigger),
             text = "No user found"
         )
     }

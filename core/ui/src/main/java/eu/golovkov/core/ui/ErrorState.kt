@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import eu.golovkov.core.designsystem.theme.NBAPadding
 
 @Composable
 fun ErrorState(
@@ -22,12 +22,12 @@ fun ErrorState(
 ) {
     Column(
         modifier = modifier
-            .padding(16.dp)
+            .padding(NBAPadding.medium)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = Modifier.height(48.dp))
+        Spacer(modifier = Modifier.height(NBAPadding.large))
         Text(
             text = "Something went wrong",
             modifier = Modifier.fillMaxWidth(),
@@ -36,7 +36,7 @@ fun ErrorState(
             fontWeight = FontWeight.Bold,
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(NBAPadding.small))
 
         Text(
             text = "Please try again later",

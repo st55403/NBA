@@ -11,10 +11,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
+import eu.golovkov.core.designsystem.theme.NBAPadding
 import eu.golovkov.core.ui.ErrorState
 import org.koin.androidx.compose.getViewModel
 
@@ -48,7 +48,7 @@ private fun TeamDetails(
             contentDesc = "Loading",
             modifier = modifier
                 .fillMaxWidth()
-                .padding(all = 32.dp)
+                .padding(all = NBAPadding.bigger)
         )
 
         is TeamUiState.Success -> {
@@ -56,13 +56,13 @@ private fun TeamDetails(
             Card(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(all = 16.dp),
+                    .padding(all = NBAPadding.medium),
                 shape = MaterialTheme.shapes.large,
             ) {
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
-                        .padding(all = 16.dp),
+                        .padding(all = NBAPadding.medium),
                 ) {
                     Text(
                         text = "${team.fullName}, ${team.abbreviation}",

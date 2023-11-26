@@ -13,12 +13,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.designsystem.component.NBATopicTag
+import eu.golovkov.core.designsystem.theme.NBAPadding
 import eu.golovkov.core.model.data.Team
 import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.feature.teamdetails.destinations.TeamDetailsScreenDestination
@@ -59,7 +59,7 @@ private fun PlayerDetails(
             contentDesc = "Loading",
             modifier = modifier
                 .fillMaxWidth()
-                .padding(all = 32.dp)
+                .padding(all = NBAPadding.bigger)
         )
 
         is PlayerDetailsUiState.Success -> {
@@ -67,13 +67,13 @@ private fun PlayerDetails(
             Card(
                 modifier = modifier
                     .fillMaxWidth()
-                    .padding(all = 16.dp),
+                    .padding(all = NBAPadding.medium),
                 shape = MaterialTheme.shapes.large,
             ) {
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
-                        .padding(all = 16.dp),
+                        .padding(all = NBAPadding.medium),
                 ) {
                     Text(
                         text = "${player.firstName} ${player.lastName}",
