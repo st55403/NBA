@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import eu.golovkov.core.designsystem.theme.NBAPadding
@@ -29,7 +30,7 @@ fun ErrorState(
     ) {
         Spacer(modifier = Modifier.height(NBAPadding.large))
         Text(
-            text = "Something went wrong",
+            text = stringResource(R.string.error_title),
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.titleMedium,
@@ -39,7 +40,7 @@ fun ErrorState(
         Spacer(modifier = Modifier.height(NBAPadding.small))
 
         Text(
-            text = "Please try again later",
+            text = stringResource(R.string.error_message),
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.bodyMedium,
