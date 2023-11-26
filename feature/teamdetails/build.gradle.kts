@@ -63,4 +63,6 @@ dependencies {
     ksp(libs.compose.destination.ksp)
     implementation(libs.koin)
     implementation(libs.androidx.material3)
+    implementation(libs.ui.tooling)
+    implementation(libs.ui.tooling.preview)
 }

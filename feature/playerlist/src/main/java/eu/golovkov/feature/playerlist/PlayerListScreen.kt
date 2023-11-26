@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramcosta.composedestinations.annotation.Destination
@@ -24,9 +25,13 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBALoadingWheel
 import eu.golovkov.core.designsystem.theme.NBAPadding
+import eu.golovkov.core.designsystem.theme.NBATheme
 import eu.golovkov.core.model.data.Player
+import eu.golovkov.core.ui.DevicePreviews
 import eu.golovkov.core.ui.ErrorState
+import eu.golovkov.core.ui.MockData
 import eu.golovkov.feature.playerdetails.destinations.PlayerDetailsScreenDestination
+import kotlinx.coroutines.flow.flowOf
 import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
@@ -162,6 +167,25 @@ private fun EmptyItem(
         Text(
             modifier = Modifier.padding(all = NBAPadding.bigger),
             text = "No user found"
+        )
+    }
+}
+
+@DevicePreviews
+@Composable
+private fun PlayerListPreview() {
+    NBATheme {
+        UsersScreen(
+            players = flowOf(
+                PagingData.from(
+                    listOf(
+                        MockData.player,
+                        MockData.player,
+                        MockData.player,
+                    )
+                )
+            ).collectAsLazyPagingItems(),
+            onPlayerClick = { }
         )
     }
 }

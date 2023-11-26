@@ -19,8 +19,11 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.designsystem.component.NBATopicTag
 import eu.golovkov.core.designsystem.theme.NBAPadding
+import eu.golovkov.core.designsystem.theme.NBATheme
 import eu.golovkov.core.model.data.Team
+import eu.golovkov.core.ui.DevicePreviews
 import eu.golovkov.core.ui.ErrorState
+import eu.golovkov.core.ui.MockData
 import eu.golovkov.feature.teamdetails.destinations.TeamDetailsScreenDestination
 import org.koin.androidx.compose.getViewModel
 
@@ -109,5 +112,18 @@ private fun PlayerDetails(
                 }
             }
         }
+    }
+}
+
+@DevicePreviews
+@Composable
+private fun PlayerDetailsPreview() {
+    NBATheme {
+        PlayerDetails(
+            state = PlayerDetailsUiState.Success(
+                player = MockData.player
+            ),
+            onTeamClick = { /* no-op */ }
+        )
     }
 }

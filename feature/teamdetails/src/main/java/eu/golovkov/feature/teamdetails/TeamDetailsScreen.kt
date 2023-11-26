@@ -15,7 +15,10 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.designsystem.theme.NBAPadding
+import eu.golovkov.core.designsystem.theme.NBATheme
+import eu.golovkov.core.ui.DevicePreviews
 import eu.golovkov.core.ui.ErrorState
+import eu.golovkov.core.ui.MockData
 import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
@@ -80,5 +83,17 @@ private fun TeamDetails(
                 }
             }
         }
+    }
+}
+
+@DevicePreviews
+@Composable
+private fun TeamDetailsPreview() {
+    NBATheme {
+        TeamDetails(
+            state = TeamUiState.Success(
+                team = MockData.player.team
+            )
+        )
     }
 }

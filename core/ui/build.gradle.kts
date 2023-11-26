@@ -42,6 +42,7 @@ android {
 dependencies {
 
     implementation(projects.core.designsystem)
+    implementation(projects.core.model)
 
     implementation(libs.core.ktx)
     implementation(platform(libs.compose.bom))
