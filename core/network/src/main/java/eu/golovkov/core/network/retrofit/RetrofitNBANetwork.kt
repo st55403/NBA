@@ -32,18 +32,16 @@ private interface RetrofitNiaNetworkApi {
     ): NetworkTeam
 }
 
-class RetrofitNBANetwork(BASE_URL: String) : RetrofitNBANetworkApi {
-    private val intercepter = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
-    }
-    private val client = OkHttpClient.Builder().apply {
-        addInterceptor(intercepter)
-    }.build()
-    val json = Json {
-        ignoreUnknownKeys = true
-    }
+class RetrofitNBANetwork(url: String) : RetrofitNBANetworkApi {
+    private val client = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        })
+        .build()
+
+    private val json = Json { ignoreUnknownKeys = true }
     private val networkApi = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(url)
         .callFactory(client)
         .addConverterFactory(
             json.asConverterFactory("application/json".toMediaType())
