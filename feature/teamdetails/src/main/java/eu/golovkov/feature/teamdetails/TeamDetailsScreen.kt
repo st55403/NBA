@@ -1,5 +1,6 @@
 package eu.golovkov.feature.teamdetails
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
@@ -58,30 +59,25 @@ private fun TeamDetails(
                     .padding(all = 16.dp),
                 shape = MaterialTheme.shapes.large,
             ) {
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = team.abbreviation
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = team.city
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = team.conference
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = team.division
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = team.fullName
-                )
-                Text(
-                    modifier = modifier.padding(horizontal = 32.dp),
-                    text = team.name
-                )
+                Column(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .padding(all = 16.dp),
+                ) {
+                    Text(
+                        text = "${team.fullName}, ${team.abbreviation}",
+                        style = MaterialTheme.typography.headlineMedium,
+                    )
+                    Text(
+                        text = team.city
+                    )
+                    Text(
+                        text = team.conference
+                    )
+                    Text(
+                        text = team.division
+                    )
+                }
             }
         }
     }
