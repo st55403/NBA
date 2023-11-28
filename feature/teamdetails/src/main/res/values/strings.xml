@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back_button_content_desc">Navigate back</string>
+    <string name="team_details_title">Team Details</string>
+</resources>

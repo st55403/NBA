@@ -3,4 +3,6 @@
     <string name="position">"Position: %1$s"</string>
     <string name="height">"Height: %1$.1f feet or %2$.1f inches"</string>
     <string name="weight">"Weight: %1$.1f"</string>
+    <string name="player_details_title">Player details</string>
+    <string name="back_button_content_desc">Navigate back</string>
 </resources>
