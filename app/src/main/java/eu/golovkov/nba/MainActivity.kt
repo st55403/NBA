@@ -19,6 +19,7 @@ import eu.golovkov.feature.playerdetails.di.PlayerDetailsModule
 import eu.golovkov.feature.playerlist.di.PlayerListModule
 import eu.golovkov.feature.teamdetails.di.TeamDetailsModule
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +27,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        startKoin {
+        GlobalContext.getKoinApplicationOrNull() ?: startKoin {
             androidContext(this@MainActivity.application)
             modules(
                 NetworkModule(),
