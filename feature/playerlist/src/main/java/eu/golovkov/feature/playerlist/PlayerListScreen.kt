@@ -1,5 +1,6 @@
 package eu.golovkov.feature.playerlist
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -59,7 +60,9 @@ private fun UsersScreen(
     onPlayerClick: (Player) -> Unit
 ) {
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colorScheme.background),
         verticalArrangement = if (players.itemCount > 0) Arrangement.spacedBy(NBAPadding.small) else Arrangement.Center,
         contentPadding = PaddingValues(
             all = NBAPadding.medium
