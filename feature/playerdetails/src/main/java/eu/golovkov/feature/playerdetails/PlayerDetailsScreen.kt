@@ -20,10 +20,12 @@ import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.designsystem.component.NBATopicTag
 import eu.golovkov.core.designsystem.theme.NBAPadding
 import eu.golovkov.core.designsystem.theme.NBATheme
+import eu.golovkov.core.model.data.Player
 import eu.golovkov.core.model.data.Team
 import eu.golovkov.core.ui.DevicePreviews
 import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.core.ui.MockData
+import eu.golovkov.core.ui.UiState
 import eu.golovkov.feature.teamdetails.destinations.TeamDetailsScreenDestination
 import org.koin.androidx.compose.getViewModel
 
@@ -52,21 +54,21 @@ fun PlayerDetailsScreen(
 @Composable
 private fun PlayerDetails(
     modifier: Modifier = Modifier,
-    state: PlayerDetailsUiState,
+    state: UiState<Player>,
     onTeamClick: (Team) -> Unit,
 ) {
     when (state) {
-        PlayerDetailsUiState.Error -> ErrorState(modifier)
+        UiState.Error -> ErrorState(modifier)
 
-        PlayerDetailsUiState.Loading -> NBAOverlayLoadingWheel(
+        UiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
             modifier = modifier
                 .fillMaxWidth()
                 .padding(all = NBAPadding.bigger)
         )
 
-        is PlayerDetailsUiState.Success -> {
-            val player = state.player
+        is UiState.Success -> {
+            val player = state.data
             Card(
                 modifier = modifier
                     .fillMaxWidth()
@@ -120,8 +122,8 @@ private fun PlayerDetails(
 private fun PlayerDetailsPreview() {
     NBATheme {
         PlayerDetails(
-            state = PlayerDetailsUiState.Success(
-                player = MockData.player
+            state = UiState.Success(
+                data = MockData.player
             ),
             onTeamClick = { /* no-op */ }
         )

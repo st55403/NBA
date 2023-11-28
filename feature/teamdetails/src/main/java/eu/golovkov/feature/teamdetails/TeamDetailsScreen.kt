@@ -16,9 +16,11 @@ import com.ramcosta.composedestinations.annotation.RootNavGraph
 import eu.golovkov.core.designsystem.component.NBAOverlayLoadingWheel
 import eu.golovkov.core.designsystem.theme.NBAPadding
 import eu.golovkov.core.designsystem.theme.NBATheme
+import eu.golovkov.core.model.data.Team
 import eu.golovkov.core.ui.DevicePreviews
 import eu.golovkov.core.ui.ErrorState
 import eu.golovkov.core.ui.MockData
+import eu.golovkov.core.ui.UiState
 import org.koin.androidx.compose.getViewModel
 
 @RootNavGraph(start = true)
@@ -42,20 +44,20 @@ fun TeamDetailsScreen(
 @Composable
 private fun TeamDetails(
     modifier: Modifier = Modifier,
-    state: TeamUiState,
+    state: UiState<Team>,
 ) {
     when (state) {
-        TeamUiState.Error -> ErrorState(modifier)
+        UiState.Error -> ErrorState(modifier)
 
-        TeamUiState.Loading -> NBAOverlayLoadingWheel(
+        UiState.Loading -> NBAOverlayLoadingWheel(
             contentDesc = "Loading",
             modifier = modifier
                 .fillMaxWidth()
                 .padding(all = NBAPadding.bigger)
         )
 
-        is TeamUiState.Success -> {
-            val team = state.team
+        is UiState.Success -> {
+            val team = state.data
             Card(
                 modifier = modifier
                     .fillMaxWidth()
@@ -91,8 +93,8 @@ private fun TeamDetails(
 private fun TeamDetailsPreview() {
     NBATheme {
         TeamDetails(
-            state = TeamUiState.Success(
-                team = MockData.player.team
+            state = UiState.Success(
+                data = MockData.player.team
             )
         )
     }
