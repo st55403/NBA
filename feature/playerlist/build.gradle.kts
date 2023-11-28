@@ -65,4 +65,5 @@ dependencies {
     implementation(libs.compose.destination.core)
     implementation(libs.androidx.material3)
     ksp(libs.compose.destination.ksp)
+    implementation(libs.glide)
 }

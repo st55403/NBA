@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -16,11 +17,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -34,6 +39,8 @@ import eu.golovkov.core.ui.MockData
 import eu.golovkov.feature.playerdetails.destinations.PlayerDetailsScreenDestination
 import kotlinx.coroutines.flow.flowOf
 import org.koin.androidx.compose.getViewModel
+
+private const val RANDOM_CAT = "https://cataas.com/cat?position=centre"
 
 @RootNavGraph(start = true)
 @Destination
@@ -126,6 +133,7 @@ private fun UsersScreen(
     }
 }
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 private fun PlayerItem(
     modifier: Modifier = Modifier,
@@ -138,23 +146,41 @@ private fun PlayerItem(
             .clickable { onClick() },
         shape = MaterialTheme.shapes.large,
     ) {
-        Column(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(all = NBAPadding.medium),
-        ) {
-            Text(
-                text = "${player.firstName} ${player.lastName}",
-                style = MaterialTheme.typography.headlineMedium,
-            )
-            Text(
-                text = stringResource(R.string.position, player.position),
-                style = MaterialTheme.typography.headlineSmall,
-            )
-            Text(
-                text = stringResource(R.string.team, player.team.fullName),
-                style = MaterialTheme.typography.bodyLarge,
-            )
+        Row {
+            Column(
+                modifier = modifier.weight(1f)
+            ) {
+                GlideImage(
+                    model = RANDOM_CAT,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    alignment = Alignment.Center,
+                    contentScale = ContentScale.None,
+                ) {
+                    it
+                        .skipMemoryCache(true)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                }
+            }
+            Column(
+                modifier = modifier
+                    .weight(2f)
+                    .padding(all = NBAPadding.medium),
+            ) {
+                Text(
+                    text = "${player.firstName} ${player.lastName}",
+                    style = MaterialTheme.typography.headlineMedium,
+                )
+                Text(
+                    text = stringResource(R.string.position, player.position),
+                    style = MaterialTheme.typography.headlineSmall,
+                )
+                Text(
+                    text = stringResource(R.string.team, player.team.fullName),
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
         }
     }
 }
